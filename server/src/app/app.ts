@@ -2,7 +2,7 @@ import express, { Application, NextFunction, Request, Response } from "express";
 import dotenv from "dotenv";
 import morgan from "morgan";
 import cors from "cors";
-import router from "./routes/index.routes"
+import router from "../routes/index.routes"
 import helmet from "helmet";
 import { HttpError } from "http-errors";
 
