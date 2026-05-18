@@ -6,27 +6,111 @@
 generator client {
   provider = "prisma-client-js"
   output   = "../generated/prisma"
-
 }
 
 datasource db {
   provider = "postgresql"
 }
 
+enum DriverSignature {
+  SIGNED_TO_GO
+  SIGNED_TO_RETURN
+  BETWEEN
+  NOT_SIGNED
+}
+
+enum HourEntryStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum Role {
+  USER
+  ADMIN
+}
 model User {
   id        Int      @id @default(autoincrement())
-  name      String
+  firstname String
+  lastname  String
   email     String   @unique
-  password  String
+  password  String 
   createdAt DateTime @default(now())
- // role      Role     @default(USER)
-}
-// model Role  {
-//   id   Int    @id @default(autoincrement())
-//   name String @unique
-// }
+  updateAt  DateTime
+  role      Role     @default(USER)
 
-// enum Role {
-//   USER
-//   ADMIN
-// }
+  @@index([email, firstname])
+  @@map("users")
+}
+
+
+model Vehicle {
+  id        Int      @id @default(autoincrement())
+  plate     String   @unique
+  brand     String
+  model     String
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updateAt  DateTime
+  /**
+   * Note: We can create an index on the plate field to optimize queries that filter by plate. This is especially useful if we expect to frequently search for vehicles by their plate number. By adding an index, we can improve the performance of these queries, as the database can quickly locate the relevant records without having to scan the entire table.
+   */
+
+  @@index([plate])
+  @@map("vehicles")
+}
+
+model Site {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updateAt    DateTime
+  /**
+   * Note: We can create an index on the name field to optimize queries that filter by site name. This is particularly beneficial if we expect to frequently search for sites by their name. By adding an index, we can enhance the performance of these queries, as the database can quickly locate the relevant records without having to scan the entire table.
+   */
+
+  @@index([name])
+  @@map("sites")
+}
+
+model project {
+  id            Int      @id @default(autoincrement())
+  projectNumber String   @unique
+  tittle        String?
+  description   String?
+  active        Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updateAt      DateTime
+
+  @@index([projectNumber, active])
+  @@map("projects")
+  /*
+  note: We can create a composite index on the projectNumber and active fields to optimize queries that filter by both project number and active status. This is particularly useful if we expect to frequently search for projects based on their project number and whether they are active or not. By adding a composite index, we can improve the performance of these queries, as the database can quickly locate the relevant records without having to scan the entire table.
+  */
+}
+model hour_entry {
+  id Int @id @default(autoincrement())
+  userId Int
+  vehicleId Int
+  projectId Int
+  workDate DateTime
+  startTime DateTime
+  endTime DateTime
+  extraHours Decimal
+  driverSignature DriverSignature
+  taskDetails String?
+  status HourEntryStatus @default(PENDING)
+  approverId Int?
+  approvalDate DateTime?
+  createdAt DateTime @default(now())
+  updateAt DateTime
+
+  @@index([userId, vehicleId, projectId, workDate])
+  @@map("hour_entries")
+
+  /*
+  note: We can create a composite index on the userId, vehicleId, projectId, and workDate fields to optimize queries that filter by these fields. This is particularly beneficial if we expect to frequently search for hour entries based on the user, vehicle, project, and work date. By adding a composite index, we can enhance the performance of these queries, as the database can quickly locate the relevant records without having to scan the entire table.
+  */
+}
