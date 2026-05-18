@@ -38,7 +38,7 @@ model User {
   createdAt DateTime @default(now())
   updateAt  DateTime
   role      Role     @default(USER)
-
+  hourEntries hour_entry[]
   @@index([email, firstname])
   @@map("users")
 }
@@ -52,6 +52,7 @@ model Vehicle {
   active    Boolean  @default(true)
   createdAt DateTime @default(now())
   updateAt  DateTime
+  hourEntries hour_entry[] 
   /**
    * Note: We can create an index on the plate field to optimize queries that filter by plate. This is especially useful if we expect to frequently search for vehicles by their plate number. By adding an index, we can improve the performance of these queries, as the database can quickly locate the relevant records without having to scan the entire table.
    */
@@ -67,6 +68,7 @@ model Site {
   active      Boolean  @default(true)
   createdAt   DateTime @default(now())
   updateAt    DateTime
+  projects     project[]
   /**
    * Note: We can create an index on the name field to optimize queries that filter by site name. This is particularly beneficial if we expect to frequently search for sites by their name. By adding an index, we can enhance the performance of these queries, as the database can quickly locate the relevant records without having to scan the entire table.
    */
@@ -83,7 +85,9 @@ model project {
   active        Boolean  @default(true)
   createdAt     DateTime @default(now())
   updateAt      DateTime
-
+  siteId        Int
+  site          Site     @relation(fields: [siteId], references: [id])
+  hourEntries hour_entry[]
   @@index([projectNumber, active])
   @@map("projects")
   /*
@@ -92,22 +96,41 @@ model project {
 }
 model hour_entry {
   id Int @id @default(autoincrement())
+  user User @relation(fields: [userId], references: [id])
+  vehicle Vehicle @relation(fields: [vehicleId], references: [id])
+  project project @relation(fields: [projectId], references: [id])
   userId Int
   vehicleId Int
   projectId Int
   workDate DateTime
   startTime DateTime
   endTime DateTime
+  //hour calculation: (endTime - startTime) in hours
   extraHours Decimal
   driverSignature DriverSignature
   taskDetails String?
   status HourEntryStatus @default(PENDING)
   approvedId Int?
+  //approvedBy User? @relation("approvedBy", fields: [approvedId], references: [id])
   approvedDate DateTime?
   createdAt DateTime @default(now())
   updateAt DateTime
 
-  @@index([userId, vehicleId, projectId, workDate])
+  @@index([userId])
+
+@@index([projectId])
+
+@@index([vehicleId])
+
+@@index([workDate])
+
+@@index([status])
+
+@@index([createdAt])
+
+@@index([userId, workDate])
+
+@@index([projectId, workDate])
   @@map("hour_entries")
 
   /*
