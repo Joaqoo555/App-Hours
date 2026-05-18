@@ -102,8 +102,8 @@ model hour_entry {
   driverSignature DriverSignature
   taskDetails String?
   status HourEntryStatus @default(PENDING)
-  approverId Int?
-  approvalDate DateTime?
+  approvedId Int?
+  approvedDate DateTime?
   createdAt DateTime @default(now())
   updateAt DateTime
 
