@@ -1,33 +1,16 @@
-// import { PrismaClient } from '@prisma/client'
-// import bcrypt from 'bcrypt'
 
-// const prisma = new PrismaClient()
 
-// async function main() {
-//   const adminEmail = "admin@tuapp.com"
+//POST auth register
+export const register = async (req: Request, res: Response) => {
+    try {
+        
+    } catch (error) {
+        
+    }
 
-//   const existingAdmin = await prisma.user.findUnique({
-//     where: { email: adminEmail }
-//   })
+}
 
-//   if (!existingAdmin) {
-//     const hashedPassword = await bcrypt.hash("admin123", 10)
+//POST auth login
 
-//     await prisma.user.create({
-//       data: {
-//         email: adminEmail,
-//         password: hashedPassword,
-//         role: "ADMIN"
-//       }
-//     })
 
-//     console.log("Admin creado")
-//   } else {
-//     console.log("Admin ya existe")
-//   }
-// }
-
-// main()
-//   .catch(console.error)
-//   .finally(() => prisma.$disconnect())
-
+//GET me

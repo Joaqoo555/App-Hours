@@ -17,8 +17,7 @@ const prisma = new PrismaClient({
 });
 
 
-
-export async function connectDB() {
+export const connectDB = async () => {
     try {
         await prisma.$connect();
         console.log("Database connected successfully");
@@ -29,7 +28,7 @@ export async function connectDB() {
     }
 }
 
-export async function disconnectDB() {
+export const disconnectDB = async () => {
     try {
         await prisma.$disconnect();
         console.log("Database disconnected successfully");
