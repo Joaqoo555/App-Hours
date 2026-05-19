@@ -1,0 +1,150 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum DriverSignature {
+  SIGNED_TO_GO
+  SIGNED_TO_RETURN
+  BETWEEN
+  NOT_SIGNED
+}
+
+enum HourEntryStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id          Int          @id @default(autoincrement())
+  firstname   String
+  lastname    String
+  email       String       @unique
+  password    String
+  createdAt   DateTime     @default(now())
+  updateAt    DateTime
+  role        Role         @default(USER)
+  hourEntries hour_entry[]
+
+  @@index([email, firstname])
+  @@map("users")
+}
+
+model Vehicle {
+  id          Int          @id @default(autoincrement())
+  plate       String       @unique
+  brand       String
+  model       String
+  active      Boolean      @default(true)
+  createdAt   DateTime     @default(now())
+  updateAt    DateTime
+  hourEntries hour_entry[]
+  /**
+   * Note: We can create an index on the plate field to optimize queries that filter by plate. This is especially useful if we expect to frequently search for vehicles by their plate number. By adding an index, we can improve the performance of these queries, as the database can quickly locate the relevant records without having to scan the entire table.
+   */
+
+  @@index([plate])
+  @@map("vehicles")
+}
+
+model Site {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  active      Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updateAt    DateTime
+  projects    project[]
+  /**
+   * Note: We can create an index on the name field to optimize queries that filter by site name. This is particularly beneficial if we expect to frequently search for sites by their name. By adding an index, we can enhance the performance of these queries, as the database can quickly locate the relevant records without having to scan the entire table.
+   */
+
+  @@index([name])
+  @@map("sites")
+}
+
+model project {
+  id            Int          @id @default(autoincrement())
+  projectNumber String       @unique
+  tittle        String?
+  description   String?
+  active        Boolean      @default(true)
+  createdAt     DateTime     @default(now())
+  updateAt      DateTime
+  siteId        Int
+  site          Site         @relation(fields: [siteId], references: [id])
+  hourEntries   hour_entry[]
+  /**
+   * note: We can create a composite index on the projectNumber and active fields to optimize queries that filter by both project number and active status. This is particularly useful if we expect to frequently search for projects based on their project number and whether they are active or not. By adding a composite index, we can improve the performance of these queries, as the database can quickly locate the relevant records without having to scan the entire table.
+   */
+
+  @@index([projectNumber, active])
+  @@map("projects")
+}
+
+model hour_entry {
+  id          Int      @id @default(autoincrement())
+  user        User     @relation(fields: [userId], references: [id])
+  vehicle     Vehicle  @relation(fields: [vehicleId], references: [id])
+  project     project  @relation(fields: [projectId], references: [id])
+  userId      Int
+  vehicleId   Int
+  projectId   Int
+  workDate    DateTime
+  startTime   DateTime
+  endTime     DateTime
+  //hour calculation: (endTime - startTime) in hours
+  normalHours Decimal  @default(0)
+
+  extra50Hours  Decimal @default(0)
+  night50Hours  Decimal @default(0)
+  extra100Hours Decimal @default(0)
+  //meal of 10hs
+  tenHourMeal   Boolean
+  //almuerzo trabajado
+  launchWork    Boolean
+  //pernocte
+  pernoctation  Boolean
+  //meal daily
+  dailyMeal     Boolean
+  //if is your day off, this boolean value will be true, and the hours will be calculated as 8 normal hours, and the rest of the hours will be calculated as extra 100%
+  isHoliday     Boolean
+
+  driverSignature DriverSignature
+  taskDetails     String?
+  status          HourEntryStatus @default(PENDING)
+  approvedId      Int?
+  //approvedBy User? @relation("approvedBy", fields: [approvedId], references: [id])
+  approvedDate    DateTime?
+  createdAt       DateTime        @default(now())
+  updateAt        DateTime
+
+  /**
+   * note: We can create a composite index on the userId, vehicleId, projectId, and workDate fields to optimize queries that filter by these fields. This is particularly beneficial if we expect to frequently search for hour entries based on the user, vehicle, project, and work date. By adding a composite index, we can enhance the performance of these queries, as the database can quickly locate the relevant records without having to scan the entire table.
+   */
+
+  @@index([userId])
+  @@index([projectId])
+  @@index([vehicleId])
+  @@index([workDate])
+  @@index([status])
+  @@index([createdAt])
+  @@index([userId, workDate])
+  @@index([projectId, workDate])
+  @@map("hour_entries")
+}

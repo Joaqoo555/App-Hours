@@ -1,8 +1,8 @@
 import { Router } from "express";
-import authRouter from "./auth.routes"
-import hourRouter from "./hour.routes"
-import reportRouter from "./report.routes"
-import userRouter from "./user.routes"
+import authRouter from "../modules/auth/auth.routes"
+import hourRouter from "../modules/hour-entries/hour.routes"
+import reportRouter from "../modules/report/report.routes"
+import userRouter from "../modules/users/user.routes"
 
 
 
