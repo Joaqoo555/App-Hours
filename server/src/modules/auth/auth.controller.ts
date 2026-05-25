@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { registerUserDTO } from "./auth.types";
 import { registerService } from "./auth.service";
+import { errorHandler } from "../../shared/errors/errorHandler";
 
 //POST auth register
 export const register = async (
@@ -11,17 +12,8 @@ export const register = async (
     const newUser = await registerService(req.body);
     return res.status(201).json(newUser);
   } catch (error) {
-    // if (error instanceof AppError) {
-    //   return res.status(error.statusCode).json({ error: error.message });
-    // } else {
-    //   return res.status(500).json({ error: "Internal Server Error", message: error });
-    // }
-    return res
-      .status(500)
-      .json({
-        error: "Internal Server Error",
-        message: error instanceof Error ? error.message : error,
-      });
+    // Handle errors and send appropriate responses using the errorHandler middleware
+    return errorHandler(error, req, res);
   }
 };
 //POST auth login

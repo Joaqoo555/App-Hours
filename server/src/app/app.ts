@@ -4,7 +4,7 @@ import morgan from "morgan";
 import cors from "cors";
 import index from "../routes/index.routes"
 import helmet from "helmet";
-import { HttpError } from "http-errors";
+import { errorHandler } from "../shared/errors/errorHandler";
 
 dotenv.config();
 const PORT_FRONT = process.env.PORT_FRONT
@@ -26,12 +26,7 @@ app.use(helmet())
 //========== Routes =============
 app.use("/api", index)
 //====== Error handdler endware =====
-app.use((error:HttpError, _req:Request, res:Response, _next:NextFunction)=>{
-    const status = error.status
-    const message = error.message
-    console.log(`Hubo un errorStatus = ${status},Message = ${message}`)
-    res.status(status).send(message)
-})
+app.use(errorHandler)
 
 
 

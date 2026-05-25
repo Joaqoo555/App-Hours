@@ -2,7 +2,7 @@ import { connectDB } from "../config/db";
 import { env } from "../config/env";
 import app from "./app";
 
-async function bootstrap() {
+export const bootstrap = async ()=> {
   try {
     await connectDB();
 
@@ -11,8 +11,8 @@ async function bootstrap() {
     });
   } catch (error) {
     console.error("Error during bootstrap:", error);
-    throw error;
+    return Promise.reject(error);
   }
 }
 
-export default bootstrap;
+
