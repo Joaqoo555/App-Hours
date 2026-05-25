@@ -1,5 +1,0 @@
--- AlterTable
-ALTER TABLE "hour_entries" ALTER COLUMN "extra100Hours" SET DEFAULT 0,
-ALTER COLUMN "extra50Hours" SET DEFAULT 0,
-ALTER COLUMN "night50Hours" SET DEFAULT 0,
-ALTER COLUMN "normalHours" SET DEFAULT 0;

@@ -1,9 +1,3 @@
-/*
-  Warnings:
-
-  - You are about to drop the `User` table. If the table is not empty, all the data it contains will be lost.
-
-*/
 -- CreateEnum
 CREATE TYPE "DriverSignature" AS ENUM ('SIGNED_TO_GO', 'SIGNED_TO_RETURN', 'BETWEEN', 'NOT_SIGNED');
 
@@ -13,9 +7,6 @@ CREATE TYPE "HourEntryStatus" AS ENUM ('PENDING', 'APPROVED', 'REJECTED');
 -- CreateEnum
 CREATE TYPE "Role" AS ENUM ('USER', 'ADMIN');
 
--- DropTable
-DROP TABLE "User";
-
 -- CreateTable
 CREATE TABLE "users" (
     "id" SERIAL NOT NULL,
@@ -24,7 +15,7 @@ CREATE TABLE "users" (
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updateAt" TIMESTAMP(3) NOT NULL,
+    "updateAt" TIMESTAMP(3),
     "role" "Role" NOT NULL DEFAULT 'USER',
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
@@ -38,7 +29,7 @@ CREATE TABLE "vehicles" (
     "model" TEXT NOT NULL,
     "active" BOOLEAN NOT NULL DEFAULT true,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updateAt" TIMESTAMP(3) NOT NULL,
+    "updateAt" TIMESTAMP(3),
 
     CONSTRAINT "vehicles_pkey" PRIMARY KEY ("id")
 );
@@ -50,7 +41,7 @@ CREATE TABLE "sites" (
     "description" TEXT,
     "active" BOOLEAN NOT NULL DEFAULT true,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updateAt" TIMESTAMP(3) NOT NULL,
+    "updateAt" TIMESTAMP(3),
 
     CONSTRAINT "sites_pkey" PRIMARY KEY ("id")
 );
@@ -63,7 +54,8 @@ CREATE TABLE "projects" (
     "description" TEXT,
     "active" BOOLEAN NOT NULL DEFAULT true,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updateAt" TIMESTAMP(3) NOT NULL,
+    "updateAt" TIMESTAMP(3),
+    "siteId" INTEGER NOT NULL,
 
     CONSTRAINT "projects_pkey" PRIMARY KEY ("id")
 );
@@ -77,14 +69,22 @@ CREATE TABLE "hour_entries" (
     "workDate" TIMESTAMP(3) NOT NULL,
     "startTime" TIMESTAMP(3) NOT NULL,
     "endTime" TIMESTAMP(3) NOT NULL,
-    "extraHours" DECIMAL(65,30) NOT NULL,
+    "normalHours" DECIMAL(65,30) NOT NULL DEFAULT 0,
+    "extra50Hours" DECIMAL(65,30) NOT NULL DEFAULT 0,
+    "night50Hours" DECIMAL(65,30) NOT NULL DEFAULT 0,
+    "extra100Hours" DECIMAL(65,30) NOT NULL DEFAULT 0,
+    "tenHourMeal" BOOLEAN NOT NULL,
+    "launchWork" BOOLEAN NOT NULL,
+    "pernoctation" BOOLEAN NOT NULL,
+    "dailyMeal" BOOLEAN NOT NULL,
+    "isHoliday" BOOLEAN NOT NULL,
     "driverSignature" "DriverSignature" NOT NULL,
     "taskDetails" TEXT,
     "status" "HourEntryStatus" NOT NULL DEFAULT 'PENDING',
-    "approverId" INTEGER,
-    "approvalDate" TIMESTAMP(3),
+    "approvedId" INTEGER,
+    "approvedDate" TIMESTAMP(3),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updateAt" TIMESTAMP(3) NOT NULL,
+    "updateAt" TIMESTAMP(3),
 
     CONSTRAINT "hour_entries_pkey" PRIMARY KEY ("id")
 );
@@ -111,4 +111,37 @@ CREATE UNIQUE INDEX "projects_projectNumber_key" ON "projects"("projectNumber");
 CREATE INDEX "projects_projectNumber_active_idx" ON "projects"("projectNumber", "active");
 
 -- CreateIndex
-CREATE INDEX "hour_entries_userId_vehicleId_projectId_workDate_idx" ON "hour_entries"("userId", "vehicleId", "projectId", "workDate");
+CREATE INDEX "hour_entries_userId_idx" ON "hour_entries"("userId");
+
+-- CreateIndex
+CREATE INDEX "hour_entries_projectId_idx" ON "hour_entries"("projectId");
+
+-- CreateIndex
+CREATE INDEX "hour_entries_vehicleId_idx" ON "hour_entries"("vehicleId");
+
+-- CreateIndex
+CREATE INDEX "hour_entries_workDate_idx" ON "hour_entries"("workDate");
+
+-- CreateIndex
+CREATE INDEX "hour_entries_status_idx" ON "hour_entries"("status");
+
+-- CreateIndex
+CREATE INDEX "hour_entries_createdAt_idx" ON "hour_entries"("createdAt");
+
+-- CreateIndex
+CREATE INDEX "hour_entries_userId_workDate_idx" ON "hour_entries"("userId", "workDate");
+
+-- CreateIndex
+CREATE INDEX "hour_entries_projectId_workDate_idx" ON "hour_entries"("projectId", "workDate");
+
+-- AddForeignKey
+ALTER TABLE "projects" ADD CONSTRAINT "projects_siteId_fkey" FOREIGN KEY ("siteId") REFERENCES "sites"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "hour_entries" ADD CONSTRAINT "hour_entries_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "hour_entries" ADD CONSTRAINT "hour_entries_vehicleId_fkey" FOREIGN KEY ("vehicleId") REFERENCES "vehicles"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "hour_entries" ADD CONSTRAINT "hour_entries_projectId_fkey" FOREIGN KEY ("projectId") REFERENCES "projects"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -37,7 +37,7 @@ model User {
   email       String       @unique
   password    String
   createdAt   DateTime     @default(now())
-  updateAt    DateTime
+  updateAt    DateTime?    @updatedAt()
   role        Role         @default(USER)
   hourEntries hour_entry[]
 
@@ -52,7 +52,7 @@ model Vehicle {
   model       String
   active      Boolean      @default(true)
   createdAt   DateTime     @default(now())
-  updateAt    DateTime
+  updateAt    DateTime?
   hourEntries hour_entry[]
   /**
    * Note: We can create an index on the plate field to optimize queries that filter by plate. This is especially useful if we expect to frequently search for vehicles by their plate number. By adding an index, we can improve the performance of these queries, as the database can quickly locate the relevant records without having to scan the entire table.
@@ -68,7 +68,7 @@ model Site {
   description String?
   active      Boolean   @default(true)
   createdAt   DateTime  @default(now())
-  updateAt    DateTime
+  updateAt    DateTime?
   projects    project[]
   /**
    * Note: We can create an index on the name field to optimize queries that filter by site name. This is particularly beneficial if we expect to frequently search for sites by their name. By adding an index, we can enhance the performance of these queries, as the database can quickly locate the relevant records without having to scan the entire table.
@@ -85,7 +85,7 @@ model project {
   description   String?
   active        Boolean      @default(true)
   createdAt     DateTime     @default(now())
-  updateAt      DateTime
+  updateAt      DateTime?
   siteId        Int
   site          Site         @relation(fields: [siteId], references: [id])
   hourEntries   hour_entry[]
@@ -132,7 +132,7 @@ model hour_entry {
   //approvedBy User? @relation("approvedBy", fields: [approvedId], references: [id])
   approvedDate    DateTime?
   createdAt       DateTime        @default(now())
-  updateAt        DateTime
+  updateAt        DateTime?
 
   /**
    * note: We can create a composite index on the userId, vehicleId, projectId, and workDate fields to optimize queries that filter by these fields. This is particularly beneficial if we expect to frequently search for hour entries based on the user, vehicle, project, and work date. By adding a composite index, we can enhance the performance of these queries, as the database can quickly locate the relevant records without having to scan the entire table.

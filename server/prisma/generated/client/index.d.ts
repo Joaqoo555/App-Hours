@@ -1587,7 +1587,7 @@ export namespace Prisma {
     email: string
     password: string
     createdAt: Date
-    updateAt: Date
+    updateAt: Date | null
     role: $Enums.Role
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
@@ -1676,7 +1676,7 @@ export namespace Prisma {
       email: string
       password: string
       createdAt: Date
-      updateAt: Date
+      updateAt: Date | null
       role: $Enums.Role
     }, ExtArgs["result"]["user"]>
     composites: {}
@@ -2729,7 +2729,7 @@ export namespace Prisma {
     model: string
     active: boolean
     createdAt: Date
-    updateAt: Date
+    updateAt: Date | null
     _count: VehicleCountAggregateOutputType | null
     _avg: VehicleAvgAggregateOutputType | null
     _sum: VehicleSumAggregateOutputType | null
@@ -2813,7 +2813,7 @@ export namespace Prisma {
       model: string
       active: boolean
       createdAt: Date
-      updateAt: Date
+      updateAt: Date | null
     }, ExtArgs["result"]["vehicle"]>
     composites: {}
   }
@@ -3857,7 +3857,7 @@ export namespace Prisma {
     description: string | null
     active: boolean
     createdAt: Date
-    updateAt: Date
+    updateAt: Date | null
     _count: SiteCountAggregateOutputType | null
     _avg: SiteAvgAggregateOutputType | null
     _sum: SiteSumAggregateOutputType | null
@@ -3936,7 +3936,7 @@ export namespace Prisma {
       description: string | null
       active: boolean
       createdAt: Date
-      updateAt: Date
+      updateAt: Date | null
     }, ExtArgs["result"]["site"]>
     composites: {}
   }
@@ -4996,7 +4996,7 @@ export namespace Prisma {
     description: string | null
     active: boolean
     createdAt: Date
-    updateAt: Date
+    updateAt: Date | null
     siteId: number
     _count: ProjectCountAggregateOutputType | null
     _avg: ProjectAvgAggregateOutputType | null
@@ -5094,7 +5094,7 @@ export namespace Prisma {
       description: string | null
       active: boolean
       createdAt: Date
-      updateAt: Date
+      updateAt: Date | null
       siteId: number
     }, ExtArgs["result"]["project"]>
     composites: {}
@@ -6300,7 +6300,7 @@ export namespace Prisma {
     approvedId: number | null
     approvedDate: Date | null
     createdAt: Date
-    updateAt: Date
+    updateAt: Date | null
     _count: Hour_entryCountAggregateOutputType | null
     _avg: Hour_entryAvgAggregateOutputType | null
     _sum: Hour_entrySumAggregateOutputType | null
@@ -6482,7 +6482,7 @@ export namespace Prisma {
       approvedId: number | null
       approvedDate: Date | null
       createdAt: Date
-      updateAt: Date
+      updateAt: Date | null
     }, ExtArgs["result"]["hour_entry"]>
     composites: {}
   }
@@ -7608,7 +7608,7 @@ export namespace Prisma {
     email?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
-    updateAt?: DateTimeFilter<"User"> | Date | string
+    updateAt?: DateTimeNullableFilter<"User"> | Date | string | null
     role?: EnumRoleFilter<"User"> | $Enums.Role
     hourEntries?: Hour_entryListRelationFilter
   }
@@ -7620,7 +7620,7 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
-    updateAt?: SortOrder
+    updateAt?: SortOrderInput | SortOrder
     role?: SortOrder
     hourEntries?: hour_entryOrderByRelationAggregateInput
   }
@@ -7635,7 +7635,7 @@ export namespace Prisma {
     lastname?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
-    updateAt?: DateTimeFilter<"User"> | Date | string
+    updateAt?: DateTimeNullableFilter<"User"> | Date | string | null
     role?: EnumRoleFilter<"User"> | $Enums.Role
     hourEntries?: Hour_entryListRelationFilter
   }, "id" | "email">
@@ -7647,7 +7647,7 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
-    updateAt?: SortOrder
+    updateAt?: SortOrderInput | SortOrder
     role?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
@@ -7666,7 +7666,7 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"User"> | string
     password?: StringWithAggregatesFilter<"User"> | string
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
-    updateAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    updateAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     role?: EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
   }
 
@@ -7680,7 +7680,7 @@ export namespace Prisma {
     model?: StringFilter<"Vehicle"> | string
     active?: BoolFilter<"Vehicle"> | boolean
     createdAt?: DateTimeFilter<"Vehicle"> | Date | string
-    updateAt?: DateTimeFilter<"Vehicle"> | Date | string
+    updateAt?: DateTimeNullableFilter<"Vehicle"> | Date | string | null
     hourEntries?: Hour_entryListRelationFilter
   }
 
@@ -7691,7 +7691,7 @@ export namespace Prisma {
     model?: SortOrder
     active?: SortOrder
     createdAt?: SortOrder
-    updateAt?: SortOrder
+    updateAt?: SortOrderInput | SortOrder
     hourEntries?: hour_entryOrderByRelationAggregateInput
   }
 
@@ -7705,7 +7705,7 @@ export namespace Prisma {
     model?: StringFilter<"Vehicle"> | string
     active?: BoolFilter<"Vehicle"> | boolean
     createdAt?: DateTimeFilter<"Vehicle"> | Date | string
-    updateAt?: DateTimeFilter<"Vehicle"> | Date | string
+    updateAt?: DateTimeNullableFilter<"Vehicle"> | Date | string | null
     hourEntries?: Hour_entryListRelationFilter
   }, "id" | "plate">
 
@@ -7716,7 +7716,7 @@ export namespace Prisma {
     model?: SortOrder
     active?: SortOrder
     createdAt?: SortOrder
-    updateAt?: SortOrder
+    updateAt?: SortOrderInput | SortOrder
     _count?: VehicleCountOrderByAggregateInput
     _avg?: VehicleAvgOrderByAggregateInput
     _max?: VehicleMaxOrderByAggregateInput
@@ -7734,7 +7734,7 @@ export namespace Prisma {
     model?: StringWithAggregatesFilter<"Vehicle"> | string
     active?: BoolWithAggregatesFilter<"Vehicle"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Vehicle"> | Date | string
-    updateAt?: DateTimeWithAggregatesFilter<"Vehicle"> | Date | string
+    updateAt?: DateTimeNullableWithAggregatesFilter<"Vehicle"> | Date | string | null
   }
 
   export type SiteWhereInput = {
@@ -7746,7 +7746,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"Site"> | string | null
     active?: BoolFilter<"Site"> | boolean
     createdAt?: DateTimeFilter<"Site"> | Date | string
-    updateAt?: DateTimeFilter<"Site"> | Date | string
+    updateAt?: DateTimeNullableFilter<"Site"> | Date | string | null
     projects?: ProjectListRelationFilter
   }
 
@@ -7756,7 +7756,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     active?: SortOrder
     createdAt?: SortOrder
-    updateAt?: SortOrder
+    updateAt?: SortOrderInput | SortOrder
     projects?: projectOrderByRelationAggregateInput
   }
 
@@ -7769,7 +7769,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"Site"> | string | null
     active?: BoolFilter<"Site"> | boolean
     createdAt?: DateTimeFilter<"Site"> | Date | string
-    updateAt?: DateTimeFilter<"Site"> | Date | string
+    updateAt?: DateTimeNullableFilter<"Site"> | Date | string | null
     projects?: ProjectListRelationFilter
   }, "id">
 
@@ -7779,7 +7779,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     active?: SortOrder
     createdAt?: SortOrder
-    updateAt?: SortOrder
+    updateAt?: SortOrderInput | SortOrder
     _count?: SiteCountOrderByAggregateInput
     _avg?: SiteAvgOrderByAggregateInput
     _max?: SiteMaxOrderByAggregateInput
@@ -7796,7 +7796,7 @@ export namespace Prisma {
     description?: StringNullableWithAggregatesFilter<"Site"> | string | null
     active?: BoolWithAggregatesFilter<"Site"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Site"> | Date | string
-    updateAt?: DateTimeWithAggregatesFilter<"Site"> | Date | string
+    updateAt?: DateTimeNullableWithAggregatesFilter<"Site"> | Date | string | null
   }
 
   export type projectWhereInput = {
@@ -7809,7 +7809,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"project"> | string | null
     active?: BoolFilter<"project"> | boolean
     createdAt?: DateTimeFilter<"project"> | Date | string
-    updateAt?: DateTimeFilter<"project"> | Date | string
+    updateAt?: DateTimeNullableFilter<"project"> | Date | string | null
     siteId?: IntFilter<"project"> | number
     site?: XOR<SiteScalarRelationFilter, SiteWhereInput>
     hourEntries?: Hour_entryListRelationFilter
@@ -7822,7 +7822,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     active?: SortOrder
     createdAt?: SortOrder
-    updateAt?: SortOrder
+    updateAt?: SortOrderInput | SortOrder
     siteId?: SortOrder
     site?: SiteOrderByWithRelationInput
     hourEntries?: hour_entryOrderByRelationAggregateInput
@@ -7838,7 +7838,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"project"> | string | null
     active?: BoolFilter<"project"> | boolean
     createdAt?: DateTimeFilter<"project"> | Date | string
-    updateAt?: DateTimeFilter<"project"> | Date | string
+    updateAt?: DateTimeNullableFilter<"project"> | Date | string | null
     siteId?: IntFilter<"project"> | number
     site?: XOR<SiteScalarRelationFilter, SiteWhereInput>
     hourEntries?: Hour_entryListRelationFilter
@@ -7851,7 +7851,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     active?: SortOrder
     createdAt?: SortOrder
-    updateAt?: SortOrder
+    updateAt?: SortOrderInput | SortOrder
     siteId?: SortOrder
     _count?: projectCountOrderByAggregateInput
     _avg?: projectAvgOrderByAggregateInput
@@ -7870,7 +7870,7 @@ export namespace Prisma {
     description?: StringNullableWithAggregatesFilter<"project"> | string | null
     active?: BoolWithAggregatesFilter<"project"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"project"> | Date | string
-    updateAt?: DateTimeWithAggregatesFilter<"project"> | Date | string
+    updateAt?: DateTimeNullableWithAggregatesFilter<"project"> | Date | string | null
     siteId?: IntWithAggregatesFilter<"project"> | number
   }
 
@@ -7900,7 +7900,7 @@ export namespace Prisma {
     approvedId?: IntNullableFilter<"hour_entry"> | number | null
     approvedDate?: DateTimeNullableFilter<"hour_entry"> | Date | string | null
     createdAt?: DateTimeFilter<"hour_entry"> | Date | string
-    updateAt?: DateTimeFilter<"hour_entry"> | Date | string
+    updateAt?: DateTimeNullableFilter<"hour_entry"> | Date | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     vehicle?: XOR<VehicleScalarRelationFilter, VehicleWhereInput>
     project?: XOR<ProjectScalarRelationFilter, projectWhereInput>
@@ -7929,7 +7929,7 @@ export namespace Prisma {
     approvedId?: SortOrderInput | SortOrder
     approvedDate?: SortOrderInput | SortOrder
     createdAt?: SortOrder
-    updateAt?: SortOrder
+    updateAt?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
     vehicle?: VehicleOrderByWithRelationInput
     project?: projectOrderByWithRelationInput
@@ -7961,7 +7961,7 @@ export namespace Prisma {
     approvedId?: IntNullableFilter<"hour_entry"> | number | null
     approvedDate?: DateTimeNullableFilter<"hour_entry"> | Date | string | null
     createdAt?: DateTimeFilter<"hour_entry"> | Date | string
-    updateAt?: DateTimeFilter<"hour_entry"> | Date | string
+    updateAt?: DateTimeNullableFilter<"hour_entry"> | Date | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     vehicle?: XOR<VehicleScalarRelationFilter, VehicleWhereInput>
     project?: XOR<ProjectScalarRelationFilter, projectWhereInput>
@@ -7990,7 +7990,7 @@ export namespace Prisma {
     approvedId?: SortOrderInput | SortOrder
     approvedDate?: SortOrderInput | SortOrder
     createdAt?: SortOrder
-    updateAt?: SortOrder
+    updateAt?: SortOrderInput | SortOrder
     _count?: hour_entryCountOrderByAggregateInput
     _avg?: hour_entryAvgOrderByAggregateInput
     _max?: hour_entryMaxOrderByAggregateInput
@@ -8024,7 +8024,7 @@ export namespace Prisma {
     approvedId?: IntNullableWithAggregatesFilter<"hour_entry"> | number | null
     approvedDate?: DateTimeNullableWithAggregatesFilter<"hour_entry"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"hour_entry"> | Date | string
-    updateAt?: DateTimeWithAggregatesFilter<"hour_entry"> | Date | string
+    updateAt?: DateTimeNullableWithAggregatesFilter<"hour_entry"> | Date | string | null
   }
 
   export type UserCreateInput = {
@@ -8033,7 +8033,7 @@ export namespace Prisma {
     email: string
     password: string
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
     role?: $Enums.Role
     hourEntries?: hour_entryCreateNestedManyWithoutUserInput
   }
@@ -8045,7 +8045,7 @@ export namespace Prisma {
     email: string
     password: string
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
     role?: $Enums.Role
     hourEntries?: hour_entryUncheckedCreateNestedManyWithoutUserInput
   }
@@ -8056,7 +8056,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     hourEntries?: hour_entryUpdateManyWithoutUserNestedInput
   }
@@ -8068,7 +8068,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     hourEntries?: hour_entryUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -8080,7 +8080,7 @@ export namespace Prisma {
     email: string
     password: string
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
     role?: $Enums.Role
   }
 
@@ -8090,7 +8090,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
   }
 
@@ -8101,7 +8101,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
   }
 
@@ -8111,7 +8111,7 @@ export namespace Prisma {
     model: string
     active?: boolean
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
     hourEntries?: hour_entryCreateNestedManyWithoutVehicleInput
   }
 
@@ -8122,7 +8122,7 @@ export namespace Prisma {
     model: string
     active?: boolean
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
     hourEntries?: hour_entryUncheckedCreateNestedManyWithoutVehicleInput
   }
 
@@ -8132,7 +8132,7 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     hourEntries?: hour_entryUpdateManyWithoutVehicleNestedInput
   }
 
@@ -8143,7 +8143,7 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     hourEntries?: hour_entryUncheckedUpdateManyWithoutVehicleNestedInput
   }
 
@@ -8154,7 +8154,7 @@ export namespace Prisma {
     model: string
     active?: boolean
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
   }
 
   export type VehicleUpdateManyMutationInput = {
@@ -8163,7 +8163,7 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type VehicleUncheckedUpdateManyInput = {
@@ -8173,7 +8173,7 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SiteCreateInput = {
@@ -8181,7 +8181,7 @@ export namespace Prisma {
     description?: string | null
     active?: boolean
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
     projects?: projectCreateNestedManyWithoutSiteInput
   }
 
@@ -8191,7 +8191,7 @@ export namespace Prisma {
     description?: string | null
     active?: boolean
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
     projects?: projectUncheckedCreateNestedManyWithoutSiteInput
   }
 
@@ -8200,7 +8200,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     projects?: projectUpdateManyWithoutSiteNestedInput
   }
 
@@ -8210,7 +8210,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     projects?: projectUncheckedUpdateManyWithoutSiteNestedInput
   }
 
@@ -8220,7 +8220,7 @@ export namespace Prisma {
     description?: string | null
     active?: boolean
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
   }
 
   export type SiteUpdateManyMutationInput = {
@@ -8228,7 +8228,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SiteUncheckedUpdateManyInput = {
@@ -8237,7 +8237,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type projectCreateInput = {
@@ -8246,7 +8246,7 @@ export namespace Prisma {
     description?: string | null
     active?: boolean
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
     site: SiteCreateNestedOneWithoutProjectsInput
     hourEntries?: hour_entryCreateNestedManyWithoutProjectInput
   }
@@ -8258,7 +8258,7 @@ export namespace Prisma {
     description?: string | null
     active?: boolean
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
     siteId: number
     hourEntries?: hour_entryUncheckedCreateNestedManyWithoutProjectInput
   }
@@ -8269,7 +8269,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     site?: SiteUpdateOneRequiredWithoutProjectsNestedInput
     hourEntries?: hour_entryUpdateManyWithoutProjectNestedInput
   }
@@ -8281,7 +8281,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     siteId?: IntFieldUpdateOperationsInput | number
     hourEntries?: hour_entryUncheckedUpdateManyWithoutProjectNestedInput
   }
@@ -8293,7 +8293,7 @@ export namespace Prisma {
     description?: string | null
     active?: boolean
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
     siteId: number
   }
 
@@ -8303,7 +8303,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type projectUncheckedUpdateManyInput = {
@@ -8313,7 +8313,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     siteId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -8336,7 +8336,7 @@ export namespace Prisma {
     approvedId?: number | null
     approvedDate?: Date | string | null
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
     user: UserCreateNestedOneWithoutHourEntriesInput
     vehicle: VehicleCreateNestedOneWithoutHourEntriesInput
     project: projectCreateNestedOneWithoutHourEntriesInput
@@ -8365,7 +8365,7 @@ export namespace Prisma {
     approvedId?: number | null
     approvedDate?: Date | string | null
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
   }
 
   export type hour_entryUpdateInput = {
@@ -8387,7 +8387,7 @@ export namespace Prisma {
     approvedId?: NullableIntFieldUpdateOperationsInput | number | null
     approvedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutHourEntriesNestedInput
     vehicle?: VehicleUpdateOneRequiredWithoutHourEntriesNestedInput
     project?: projectUpdateOneRequiredWithoutHourEntriesNestedInput
@@ -8416,7 +8416,7 @@ export namespace Prisma {
     approvedId?: NullableIntFieldUpdateOperationsInput | number | null
     approvedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type hour_entryCreateManyInput = {
@@ -8442,7 +8442,7 @@ export namespace Prisma {
     approvedId?: number | null
     approvedDate?: Date | string | null
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
   }
 
   export type hour_entryUpdateManyMutationInput = {
@@ -8464,7 +8464,7 @@ export namespace Prisma {
     approvedId?: NullableIntFieldUpdateOperationsInput | number | null
     approvedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type hour_entryUncheckedUpdateManyInput = {
@@ -8490,7 +8490,7 @@ export namespace Prisma {
     approvedId?: NullableIntFieldUpdateOperationsInput | number | null
     approvedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -8530,6 +8530,17 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type EnumRoleFilter<$PrismaModel = never> = {
     equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
     in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
@@ -8541,6 +8552,11 @@ export namespace Prisma {
     every?: hour_entryWhereInput
     some?: hour_entryWhereInput
     none?: hour_entryWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type hour_entryOrderByRelationAggregateInput = {
@@ -8636,6 +8652,20 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type EnumRoleWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
     in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
@@ -8716,11 +8746,6 @@ export namespace Prisma {
     every?: projectWhereInput
     some?: projectWhereInput
     none?: projectWhereInput
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
   }
 
   export type projectOrderByRelationAggregateInput = {
@@ -8862,17 +8887,6 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type UserScalarRelationFilter = {
@@ -9044,20 +9058,6 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
   export type hour_entryCreateNestedManyWithoutUserInput = {
     create?: XOR<hour_entryCreateWithoutUserInput, hour_entryUncheckedCreateWithoutUserInput> | hour_entryCreateWithoutUserInput[] | hour_entryUncheckedCreateWithoutUserInput[]
     connectOrCreate?: hour_entryCreateOrConnectWithoutUserInput | hour_entryCreateOrConnectWithoutUserInput[]
@@ -9078,6 +9078,10 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type EnumRoleFieldUpdateOperationsInput = {
@@ -9310,10 +9314,6 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
-  }
-
   export type UserUpdateOneRequiredWithoutHourEntriesNestedInput = {
     create?: XOR<UserCreateWithoutHourEntriesInput, UserUncheckedCreateWithoutHourEntriesInput>
     connectOrCreate?: UserCreateOrConnectWithoutHourEntriesInput
@@ -9372,6 +9372,17 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type NestedEnumRoleFilter<$PrismaModel = never> = {
@@ -9439,6 +9450,31 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedEnumRoleWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
     in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
@@ -9493,17 +9529,6 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type NestedDecimalFilter<$PrismaModel = never> = {
     equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
@@ -9527,17 +9552,6 @@ export namespace Prisma {
     in?: $Enums.HourEntryStatus[] | ListEnumHourEntryStatusFieldRefInput<$PrismaModel>
     notIn?: $Enums.HourEntryStatus[] | ListEnumHourEntryStatusFieldRefInput<$PrismaModel>
     not?: NestedEnumHourEntryStatusFilter<$PrismaModel> | $Enums.HourEntryStatus
-  }
-
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
@@ -9603,20 +9617,6 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
   export type hour_entryCreateWithoutUserInput = {
     workDate: Date | string
     startTime: Date | string
@@ -9636,7 +9636,7 @@ export namespace Prisma {
     approvedId?: number | null
     approvedDate?: Date | string | null
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
     vehicle: VehicleCreateNestedOneWithoutHourEntriesInput
     project: projectCreateNestedOneWithoutHourEntriesInput
   }
@@ -9663,7 +9663,7 @@ export namespace Prisma {
     approvedId?: number | null
     approvedDate?: Date | string | null
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
   }
 
   export type hour_entryCreateOrConnectWithoutUserInput = {
@@ -9718,7 +9718,7 @@ export namespace Prisma {
     approvedId?: IntNullableFilter<"hour_entry"> | number | null
     approvedDate?: DateTimeNullableFilter<"hour_entry"> | Date | string | null
     createdAt?: DateTimeFilter<"hour_entry"> | Date | string
-    updateAt?: DateTimeFilter<"hour_entry"> | Date | string
+    updateAt?: DateTimeNullableFilter<"hour_entry"> | Date | string | null
   }
 
   export type hour_entryCreateWithoutVehicleInput = {
@@ -9740,7 +9740,7 @@ export namespace Prisma {
     approvedId?: number | null
     approvedDate?: Date | string | null
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
     user: UserCreateNestedOneWithoutHourEntriesInput
     project: projectCreateNestedOneWithoutHourEntriesInput
   }
@@ -9767,7 +9767,7 @@ export namespace Prisma {
     approvedId?: number | null
     approvedDate?: Date | string | null
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
   }
 
   export type hour_entryCreateOrConnectWithoutVehicleInput = {
@@ -9802,7 +9802,7 @@ export namespace Prisma {
     description?: string | null
     active?: boolean
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
     hourEntries?: hour_entryCreateNestedManyWithoutProjectInput
   }
 
@@ -9813,7 +9813,7 @@ export namespace Prisma {
     description?: string | null
     active?: boolean
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
     hourEntries?: hour_entryUncheckedCreateNestedManyWithoutProjectInput
   }
 
@@ -9853,7 +9853,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"project"> | string | null
     active?: BoolFilter<"project"> | boolean
     createdAt?: DateTimeFilter<"project"> | Date | string
-    updateAt?: DateTimeFilter<"project"> | Date | string
+    updateAt?: DateTimeNullableFilter<"project"> | Date | string | null
     siteId?: IntFilter<"project"> | number
   }
 
@@ -9862,7 +9862,7 @@ export namespace Prisma {
     description?: string | null
     active?: boolean
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
   }
 
   export type SiteUncheckedCreateWithoutProjectsInput = {
@@ -9871,7 +9871,7 @@ export namespace Prisma {
     description?: string | null
     active?: boolean
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
   }
 
   export type SiteCreateOrConnectWithoutProjectsInput = {
@@ -9898,7 +9898,7 @@ export namespace Prisma {
     approvedId?: number | null
     approvedDate?: Date | string | null
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
     user: UserCreateNestedOneWithoutHourEntriesInput
     vehicle: VehicleCreateNestedOneWithoutHourEntriesInput
   }
@@ -9925,7 +9925,7 @@ export namespace Prisma {
     approvedId?: number | null
     approvedDate?: Date | string | null
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
   }
 
   export type hour_entryCreateOrConnectWithoutProjectInput = {
@@ -9954,7 +9954,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SiteUncheckedUpdateWithoutProjectsInput = {
@@ -9963,7 +9963,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type hour_entryUpsertWithWhereUniqueWithoutProjectInput = {
@@ -9988,7 +9988,7 @@ export namespace Prisma {
     email: string
     password: string
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
     role?: $Enums.Role
   }
 
@@ -9999,7 +9999,7 @@ export namespace Prisma {
     email: string
     password: string
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
     role?: $Enums.Role
   }
 
@@ -10014,7 +10014,7 @@ export namespace Prisma {
     model: string
     active?: boolean
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
   }
 
   export type VehicleUncheckedCreateWithoutHourEntriesInput = {
@@ -10024,7 +10024,7 @@ export namespace Prisma {
     model: string
     active?: boolean
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
   }
 
   export type VehicleCreateOrConnectWithoutHourEntriesInput = {
@@ -10038,7 +10038,7 @@ export namespace Prisma {
     description?: string | null
     active?: boolean
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
     site: SiteCreateNestedOneWithoutProjectsInput
   }
 
@@ -10049,7 +10049,7 @@ export namespace Prisma {
     description?: string | null
     active?: boolean
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
     siteId: number
   }
 
@@ -10075,7 +10075,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
   }
 
@@ -10086,7 +10086,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
   }
 
@@ -10107,7 +10107,7 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type VehicleUncheckedUpdateWithoutHourEntriesInput = {
@@ -10117,7 +10117,7 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type projectUpsertWithoutHourEntriesInput = {
@@ -10137,7 +10137,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     site?: SiteUpdateOneRequiredWithoutProjectsNestedInput
   }
 
@@ -10148,7 +10148,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     siteId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -10174,7 +10174,7 @@ export namespace Prisma {
     approvedId?: number | null
     approvedDate?: Date | string | null
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
   }
 
   export type hour_entryUpdateWithoutUserInput = {
@@ -10196,7 +10196,7 @@ export namespace Prisma {
     approvedId?: NullableIntFieldUpdateOperationsInput | number | null
     approvedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     vehicle?: VehicleUpdateOneRequiredWithoutHourEntriesNestedInput
     project?: projectUpdateOneRequiredWithoutHourEntriesNestedInput
   }
@@ -10223,7 +10223,7 @@ export namespace Prisma {
     approvedId?: NullableIntFieldUpdateOperationsInput | number | null
     approvedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type hour_entryUncheckedUpdateManyWithoutUserInput = {
@@ -10248,7 +10248,7 @@ export namespace Prisma {
     approvedId?: NullableIntFieldUpdateOperationsInput | number | null
     approvedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type hour_entryCreateManyVehicleInput = {
@@ -10273,7 +10273,7 @@ export namespace Prisma {
     approvedId?: number | null
     approvedDate?: Date | string | null
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
   }
 
   export type hour_entryUpdateWithoutVehicleInput = {
@@ -10295,7 +10295,7 @@ export namespace Prisma {
     approvedId?: NullableIntFieldUpdateOperationsInput | number | null
     approvedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutHourEntriesNestedInput
     project?: projectUpdateOneRequiredWithoutHourEntriesNestedInput
   }
@@ -10322,7 +10322,7 @@ export namespace Prisma {
     approvedId?: NullableIntFieldUpdateOperationsInput | number | null
     approvedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type hour_entryUncheckedUpdateManyWithoutVehicleInput = {
@@ -10347,7 +10347,7 @@ export namespace Prisma {
     approvedId?: NullableIntFieldUpdateOperationsInput | number | null
     approvedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type projectCreateManySiteInput = {
@@ -10357,7 +10357,7 @@ export namespace Prisma {
     description?: string | null
     active?: boolean
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
   }
 
   export type projectUpdateWithoutSiteInput = {
@@ -10366,7 +10366,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     hourEntries?: hour_entryUpdateManyWithoutProjectNestedInput
   }
 
@@ -10377,7 +10377,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     hourEntries?: hour_entryUncheckedUpdateManyWithoutProjectNestedInput
   }
 
@@ -10388,7 +10388,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type hour_entryCreateManyProjectInput = {
@@ -10413,7 +10413,7 @@ export namespace Prisma {
     approvedId?: number | null
     approvedDate?: Date | string | null
     createdAt?: Date | string
-    updateAt: Date | string
+    updateAt?: Date | string | null
   }
 
   export type hour_entryUpdateWithoutProjectInput = {
@@ -10435,7 +10435,7 @@ export namespace Prisma {
     approvedId?: NullableIntFieldUpdateOperationsInput | number | null
     approvedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutHourEntriesNestedInput
     vehicle?: VehicleUpdateOneRequiredWithoutHourEntriesNestedInput
   }
@@ -10462,7 +10462,7 @@ export namespace Prisma {
     approvedId?: NullableIntFieldUpdateOperationsInput | number | null
     approvedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type hour_entryUncheckedUpdateManyWithoutProjectInput = {
@@ -10487,7 +10487,7 @@ export namespace Prisma {
     approvedId?: NullableIntFieldUpdateOperationsInput | number | null
     approvedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
 

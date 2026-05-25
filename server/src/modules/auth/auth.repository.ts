@@ -1,14 +1,21 @@
-//access to DB
 import prisma from "../../config/db";
-export const findUserByEmail = async (email: string) => {
+import { findUserByEmail } from "./auth.service";
+import { registerUserDTO } from "./auth.types";
+
+export const createUser = async (userData: registerUserDTO) => {
   try {
-    const userFind = await prisma.user.findUnique({
-      where: {
+    const { email, firstname, lastname, password } = userData;
+    //create user
+    const newUser = await prisma.user.create({
+      data: {
+        firstname,
+        lastname,
         email,
+        password,
       },
     });
-    return userFind;
+    return newUser;
   } catch (error) {
-    throw new Error("Error finding user by email");
+    throw new Error("Error creating user");
   }
 };
