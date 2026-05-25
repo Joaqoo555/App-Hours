@@ -1,5 +1,30 @@
-se levanta base de datos
-se escribe el comando npx prisma migrate dev
-se ejecuta seed para generar admin npx prisma db seed
-de ahi se levanta la app npm run dev
+# .ENV
+```
+PORT= 3200
+PORT_FRONT=http://localhost:5173
+API_KEY=JWT_23
+DATABASE_URL=postgresql://postgres:password@localhost:5432/app_hours
+SALT_ROUNDS=10
+JWT_SECRET=key_secret_jwt_2026
+JWT_EXPIRES_IN=7d
+```
+
+# CRUD
+> REGISTER
+
+```
+POST
+localhost:3200/api/auth/register
+```
+> LOGIN
+```
+POST
+localhost:3200/api/auth/login
+```
+
+> ME
+```
+POST
+localhost:3200/api/auth/me
+```
 

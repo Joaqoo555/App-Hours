@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { HttpError } from "http-errors";
 import { AppError } from ".";
 
-export const errorHandler = (
+export const handlerError = (
   error: HttpError | AppError | unknown,
   _req: Request,
   res: Response,

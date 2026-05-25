@@ -1,20 +1,19 @@
-import { registerUserDTO } from "./auth.types";
-import prisma from "../../config/db";
-import { hashPassword } from "./utils/bcrypt";
-import { createUser } from "./auth.repository";
+import { loginResponseDTO, loginUserDTO, registerUserDTO } from "./auth.types";
+import { comparePassword, hashPassword } from "../../shared/utils/bcrypt";
+import { createUser, findUserByEmail } from "./auth.repository";
 import { ConflictError } from "../../shared/errors/conflictError";
 import { registerUserSchema } from "./auth.schema";
 import { BadRequestError } from "../../shared/errors/badRequest";
+import { UnauthorizedError } from "../../shared/errors/unauthorized";
+import { generateToken } from "../../shared/utils/jwt";
 
 export const registerService = async (userData: registerUserDTO) => {
-  // Logic to register a user, e.g., hashing the password, saving to the database, etc.
   const { email, password } = userData;
   // Validate user data using Zod schema
   const parseUser = registerUserSchema.safeParse(userData);
   if (!parseUser.success) {
     throw new BadRequestError("Invalid user data");
   }
-  // Hash the password before saving the user to the database
   const hashedPassword = await hashPassword(password);
   // Check if user with the same email already exists
   if (await findUserByEmail(email)) {
@@ -28,12 +27,19 @@ export const registerService = async (userData: registerUserDTO) => {
   return safeUserData;
 };
 
-export const findUserByEmail = async (email: string) => {
-  // Logic to find a user by email in the database using Prisma and return the user data if found, or null if not found.
-  const userFind = await prisma.user.findUnique({
-    where: {
-      email,
-    },
-  });
-  return userFind;
-};
+
+export const loginService = async (userData: loginUserDTO): Promise<loginResponseDTO> => {
+  const { email, password } = userData;
+  const userFound = await findUserByEmail(email);
+  if(!userFound || !(await comparePassword(password, userFound.password))) {
+    throw new UnauthorizedError("Invalid credentials");
+  }
+  //generate token
+  const payload = {
+    userId: userFound.id,
+    role: userFound.role,
+  };
+  const token = generateToken(payload);
+  const { password: _, ...safeUserData } = userFound;
+  return { ...safeUserData, token };
+}

@@ -1,8 +1,15 @@
 import "dotenv/config";
+import {z} from "zod";
 
-export const env = {
-    PORT: process.env.PORT || 3200,
-    PORT_FRONT: process.env.PORT_FRONT || "http://localhost:3000",
-    DATABASE_URL: process.env.DATABASE_URL || "postgresql://postgres:password@localhost:5432/app_hours"
-}
 
+export const envSchema = z.object({
+    PORT: z.string(),
+    PORT_FRONT: z.string(),
+    DATABASE_URL: z.string(),
+    JWT_SECRET: z.string(),
+    JWT_EXPIRES_IN: z.string(),
+    SALT_ROUNDS: z.string(),
+    API_KEY: z.string(),
+})
+
+export const env = envSchema.parse(process.env);
